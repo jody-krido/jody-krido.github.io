@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <audio id="auth">
+        <source src="driver\hiden_zero_one_driver\sound\authorise loop.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="progrise">
+        <source src="driver\hiden_zero_one_driver\sound\progrise zero one catch press.mp3" type="audio/mpeg">
+    </audio>
+    <div class="content">
+        <div class="progrise">
+            <div class="btn-l" onclick="playAuth()">
+                scan
+            </div>
+            <div class="btn-l" onclick="progrise()">
+                progrise code 1
+            </div>
+            <div class="btn-l">
+                progrise code 2
+            </div>
+            <div class="btn-l">
+                progrise code 3
+            </div>
+            <div class="btn-l">
+                progrise code 4
+            </div>
+        </div>
+        <div class="center">
+            
+        </div>
+        <div class="right">
+            <div class="btn-r">
+                Zero Two Driver unit
+            </div>
+        </div>
+    </div>
+    <script>
+        var x = document.getElementById("auth");
+        var y = document.getElementById("progrise");
+        
+        function playAuth() { 
+            if(x.ended == false){
+                x.play(); 
+            }
+        } 
+        
+        function progrise() { 
+            if(x.ended == false){
+                x.pause(); 
+                y.play(); 
+            }
+        } 
+        </script>
+</body>
+</html>
