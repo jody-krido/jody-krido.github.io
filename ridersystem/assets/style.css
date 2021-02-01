@@ -22,7 +22,7 @@ body{
     width: 60%;
     border-radius: 50%;
     height: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: gray;
     /* display: inline-block; */
     float: left;
 }
@@ -30,7 +30,7 @@ body{
     padding: 0px;
     width: 20%;
     height: 100%;
-    background-color: :rgb(94, 94, 94);
+    background-color: rgb(94, 94, 94);
     display: inline-block;
 }
 .btn-l{

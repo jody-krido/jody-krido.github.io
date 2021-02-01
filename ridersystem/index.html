@@ -13,12 +13,18 @@
     <audio id="progrise">
         <source src="driver\hiden_zero_one_driver\sound\progrise zero one catch press.mp3" type="audio/mpeg">
     </audio>
+    <audio id="finish">
+        <source src="driver\hiden_zero_one_driver\sound\rising hopper finishing.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="error">
+        <source src="driver\hiden_zero_one_driver\sound\error rise.mp3" type="audio/mpeg">
+    </audio>
     <div class="content">
         <div class="progrise">
-            <div class="btn-l" onclick="playAuth()">
+            <div class="btn-l" id="authbtn" onclick="playAuth()">
                 scan
             </div>
-            <div class="btn-l" onclick="progrise()">
+            <div class="btn-l" id="risebtn1" onclick="progrise()">
                 progrise code 1
             </div>
             <div class="btn-l">
@@ -31,7 +37,7 @@
                 progrise code 4
             </div>
         </div>
-        <div class="center">
+        <div class="center" id="light-center">
             
         </div>
         <div class="right">
@@ -41,19 +47,41 @@
         </div>
     </div>
     <script>
-        var x = document.getElementById("auth");
-        var y = document.getElementById("progrise");
+        var auth = document.getElementById("auth");
+        var authbtn = document.getElementById("authbtn");
+        var rise = document.getElementById("progrise");
+        var light_center = document.getElementById("light-center");
+        var finish = document.getElementById("finish");
+        var error = document.getElementById("error");
         
         function playAuth() { 
-            if(x.ended == false){
-                x.play(); 
-            }
+            auth.play(); 
+            authbtn.style.backgroundColor = "gray";
+            auth.currentTime = 0;
         } 
         
         function progrise() { 
-            if(x.ended == false){
-                x.pause(); 
-                y.play(); 
+            if(document.getElementById('authbtn').style.backgroundColor == "gray"){
+                if(document.getElementById('risebtn1').style.backgroundColor == "gray"){
+                    if(rise.ended == true){
+                        finish.play();
+                    }
+                } else {
+                    if(auth.ended == true){
+                        error.play();
+                        authbtn.style.backgroundColor = 'rgb(204, 204, 204)';
+                    }else{
+                        document.getElementById('risebtn1').style.backgroundColor = "gray";
+                        auth.pause();
+                        rise.play();
+                        light_center.style.backgroundColor = 'white';
+                    }
+                }
+            } else {
+                if(auth.ended == true){
+                    error.play();
+                }
+
             }
         } 
         </script>
