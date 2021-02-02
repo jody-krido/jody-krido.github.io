@@ -37,7 +37,7 @@
                 progrise code 4
             </div>
         </div>
-        <div class="center" id="light-center">
+        <div class="center" id="light-center" onclick="unhenshin()">
             
         </div>
         <div class="right">
@@ -53,6 +53,7 @@
         var light_center = document.getElementById("light-center");
         var finish = document.getElementById("finish");
         var error = document.getElementById("error");
+        var risebtn1 = document.getElementById("risebtn1");
         
         function playAuth() { 
             auth.play(); 
@@ -84,6 +85,18 @@
 
             }
         } 
+
+        function unhenshin(){
+            if(light_center.style.backgroundColor == 'white'){
+                authbtn.style.backgroundColor = 'rgb(204, 204, 204)';
+                risebtn1.style.backgroundColor = 'rgb(204, 204, 204)';
+                rise.pause()
+                rise.currentTime = 0;
+                finish.pause()
+                finish.currentTime = 0;
+                light_center.style.backgroundColor = 'gray';
+            }
+        }
         </script>
 </body>
 </html>
