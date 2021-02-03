@@ -7,33 +7,55 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <audio id="auth">
-        <source src="driver\hiden_zero_one_driver\sound\authorise loop.mp3" type="audio/mpeg">
+    <audio id="authZeroOneDriver">
+        <source src="driver\hiden_zero_one_driver\authorise loop.mp3" type="audio/mpeg">
     </audio>
-    <audio id="progrise">
-        <source src="driver\hiden_zero_one_driver\sound\progrise zero one catch press.mp3" type="audio/mpeg">
+    <audio id="authZetsumetsuDriver">
+        <source src="driver\zetsumetsu_driver\auth loop.mp3" type="audio/mpeg">
     </audio>
+    <audio id="authEdenDriver">
+        <source src="driver\eden_driver\loop.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="authZeroTwoDriver">
+        <source src="driver\zero_two_driver\standing sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="jumpZeroOneProgrise">
+        <source src="driver\hiden_zero_one_driver\progrise zero one catch press.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="arkscorpionZetsumetsuProgrise">
+        <source src="driver\zetsumetsu_driver\ark progrise.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="edenEdenProgrise">
+        <source src="driver\eden_driver\eden progrise.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="zeroTwoProgrise">
+        <source src="driver\zero_two_driver\zero two catch press.mp3" type="audio/mpeg">
+    </audio>
+
     <audio id="finish">
-        <source src="driver\hiden_zero_one_driver\sound\rising hopper finishing.mp3" type="audio/mpeg">
+        <source src="driver\hiden_zero_one_driver\rising hopper finishing.mp3" type="audio/mpeg">
     </audio>
+
     <audio id="error">
-        <source src="driver\hiden_zero_one_driver\sound\error rise.mp3" type="audio/mpeg">
+        <source src="driver\hiden_zero_one_driver\error rise.mp3" type="audio/mpeg">
     </audio>
+
     <div class="content">
         <div class="progrise">
-            <div class="btn-l" id="authbtn" onclick="playAuth()">
+            <div class="btn-l" id="btnAuth" onclick="btncAuth()">
                 scan
             </div>
-            <div class="btn-l" id="risebtn1" onclick="progrise()">
+            <div class="btn-l" id="btnRiseJump" onclick="btncRiseJump()">
                 progrise code 1
             </div>
-            <div class="btn-l">
+            <div class="btn-l" id="btnRiseZeroTwo" onclick="btncRiseZeroTwo()">
                 progrise code 2
             </div>
-            <div class="btn-l">
+            <div class="btn-l" id="btnRiseArk" onclick="btncRiseArk()">
                 progrise code 3
             </div>
-            <div class="btn-l">
+            <div class="btn-l" id="btnRiseEden" onclick="btncRiseEden()">
                 progrise code 4
             </div>
         </div>
@@ -41,62 +63,133 @@
             
         </div>
         <div class="right">
-            <div class="btn-r">
+            <div class="btn-r" id="btnUnitZeroTwo" onclick="btncUnitZeroTwo()">
                 Zero Two Driver unit
+            </div>
+            <div class="btn-r" id="btnUnitZetrumetsu" onclick="btncUnitZetrumetsu()">
+                Zetsumetsu Driver unit
+            </div>
+            <div class="btn-r" id="btnUnitEden" onclick="btncUnitEden()">
+                Eden Driver unit
             </div>
         </div>
     </div>
     <script>
-        var auth = document.getElementById("auth");
-        var authbtn = document.getElementById("authbtn");
-        var rise = document.getElementById("progrise");
-        var light_center = document.getElementById("light-center");
-        var finish = document.getElementById("finish");
-        var error = document.getElementById("error");
-        var risebtn1 = document.getElementById("risebtn1");
-        
-        function playAuth() { 
-            auth.play(); 
-            authbtn.style.backgroundColor = "gray";
-            auth.currentTime = 0;
-        } 
-        
-        function progrise() { 
-            if(document.getElementById('authbtn').style.backgroundColor == "gray"){
-                if(document.getElementById('risebtn1').style.backgroundColor == "gray"){
-                    if(rise.ended == true){
-                        finish.play();
-                    }
-                } else {
-                    if(auth.ended == true){
-                        error.play();
-                        authbtn.style.backgroundColor = 'rgb(204, 204, 204)';
-                    }else{
-                        document.getElementById('risebtn1').style.backgroundColor = "gray";
-                        auth.pause();
-                        rise.play();
-                        light_center.style.backgroundColor = 'white';
-                    }
-                }
-            } else {
-                if(auth.ended == true){
-                    error.play();
-                }
 
+        var authZeroOneDriver = document.getElementById("authZeroOneDriver");
+        var authZeroTwoDriver = document.getElementById("authZeroTwoDriver");
+        var authZetsumetsuDriver = document.getElementById("authZetsumetsuDriver");
+        var authEdenDriver = document.getElementById("authEdenDriver");
+
+        var jumpZeroOneProgrise = document.getElementById("jumpZeroOneProgrise");
+        var zeroTwoProgrise = document.getElementById("zeroTwoProgrise");
+        var arkscorpionZetsumetsuProgrise = document.getElementById("arkscorpionZetsumetsuProgrise");
+        var edenEdenProgrise = document.getElementById("edenEdenProgrise");
+        
+        var errorRise = document.getElementById("error");
+
+        var light_center = document.getElementById("light-center");
+
+        var btnAuth = document.getElementById("btnAuth");
+        var btnRiseJump = document.getElementById("btnRiseJump");
+        var btnRiseZeroTwo = document.getElementById("btnRiseZeroTwo");
+        var btnRiseArk = document.getElementById("btnRiseArk");
+        var btnRiseEden = document.getElementById("btnRiseEden");
+
+        var btnUnitZeroTwo = document.getElementById("btnUnitZeroTwo");
+        var btnUnitZetrumetsu = document.getElementById("btnUnitZetrumetsu");
+        var btnUnitEden = document.getElementById("btnUnitEden");
+
+
+        function auth(authSound){
+            authSound.play();
+            authSound.currentTime = 0;
+        }
+        
+        function progrise(progriseSound, authSound){
+            authSound.pause();
+            authSound.currentTime = 0;
+            progriseSound.play();
+        }
+
+        function btncAuth(){
+            btnAuth.style.backgroundColor = 'gray';
+            if(btnUnitZeroTwo.style.backgroundColor == 'gray'){
+                
+                auth(authZeroTwoDriver);
+            } else if (btnUnitZetrumetsu.style.backgroundColor == 'gray') {
+                auth(authZetsumetsuDriver);
+            } else if (btnUnitEden.style.backgroundColor == 'gray') {
+                auth(authEdenDriver);
+            } else {
+                auth(authZeroOneDriver);
+            } 
+        }   
+
+        function btncRiseJump(){
+            if(btnAuth.style.backgroundColor == 'gray'){
+                if(btnUnitZeroTwo.style.backgroundColor == 'gray'){
+                    progrise(zeroTwoProgrise, authZeroTwoDriver);
+                } else if (btnUnitZetrumetsu.style.backgroundColor == 'gray') {
+                    progrise(arkscorpionZetsumetsuProgrise, authZetsumetsuDriver);
+                } else if (btnUnitEden.style.backgroundColor == 'gray') {
+                    progrise(edenEdenProgrise, authEdenDriver);
+                } else {
+                    progrise(jumpZeroOneProgrise, authZeroOneDriver);
+                }
+                light_center.style.backgroundColor = 'white';
+            } else {
+                // if(authZeroTwoDriver.ended == true || authZetsumetsuDriver.ended == true || authEdenDriver.ended == true || authZeroOneDriver.ended == true){
+                    errorRise.play();
+                // }
             }
-        } 
+
+        }
 
         function unhenshin(){
-            if(light_center.style.backgroundColor == 'white'){
-                authbtn.style.backgroundColor = 'rgb(204, 204, 204)';
-                risebtn1.style.backgroundColor = 'rgb(204, 204, 204)';
-                rise.pause()
-                rise.currentTime = 0;
-                finish.pause()
-                finish.currentTime = 0;
-                light_center.style.backgroundColor = 'gray';
+            light_center.style.backgroundColor = 'gray';
+            btnRiseJump.style.backgroundColor = 'rgb(204, 204, 204)';
+            btnAuth.style.backgroundColor = 'rgb(204, 204, 204)';
+        }
+
+        function btncUnitZeroTwo(){
+            if(btnUnitZeroTwo.style.backgroundColor == 'gray'){
+                btnUnitZeroTwo.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitZetrumetsu.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitEden.style.backgroundColor = 'rgb(204, 204, 204)'
+            } else {
+                btnUnitZeroTwo.style.backgroundColor = 'gray'
+                btnUnitZetrumetsu.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitEden.style.backgroundColor = 'rgb(204, 204, 204)'
             }
         }
-        </script>
+
+        function btncUnitZetrumetsu(){
+            if(btnUnitZetrumetsu.style.backgroundColor == 'gray'){
+                btnUnitZeroTwo.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitZetrumetsu.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitEden.style.backgroundColor = 'rgb(204, 204, 204)'
+            } else {
+                btnUnitZeroTwo.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitZetrumetsu.style.backgroundColor = 'gray'
+                btnUnitEden.style.backgroundColor = 'rgb(204, 204, 204)'
+            }
+        }
+
+        function btncUnitEden(){
+            if(btnUnitEden.style.backgroundColor == 'gray'){
+                btnUnitZeroTwo.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitZetrumetsu.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitEden.style.backgroundColor = 'rgb(204, 204, 204)'
+            } else {
+                btnUnitZeroTwo.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitZetrumetsu.style.backgroundColor = 'rgb(204, 204, 204)'
+                btnUnitEden.style.backgroundColor = 'gray'
+            }
+        }
+
+
+        
+    </script>
 </body>
 </html>
